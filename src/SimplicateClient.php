@@ -22,6 +22,7 @@ class SimplicateClient
                 "Authorization-Key" => config("laravel-simplicate.authentication.key"),
                 "Authorization-Secret" => config("laravel-simplicate.authentication.secret"),
                 "Content-Type" => "application/json",
+                "Accept" => "application/json"
             ],
        ]);
     }
