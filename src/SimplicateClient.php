@@ -17,7 +17,7 @@ class SimplicateClient
 
     public function __construct() {
        $this->httpClient = new Client([
-           "base_uri" => sprintf("https://%s.simplicate.nl/api/v%s" , config("laravel-simplicate.domain"), self::VERSION),
+           "base_uri" => $this->getBaseUri(),
             "headers" => [
                 "Authentication-Key" => config("laravel-simplicate.authentication.key"),
                 "Authentication-Secret" => config("laravel-simplicate.authentication.secret"),
@@ -25,6 +25,11 @@ class SimplicateClient
                 "Accept" => "application/json"
             ],
        ]);
+    }
+
+    public function getBaseUri(): string
+    {
+       return sprintf("https://%s.simplicate.nl/api/v%s" , config("laravel-simplicate.domain"), self::VERSION);
     }
 
     public function limit(int $limit): self {
