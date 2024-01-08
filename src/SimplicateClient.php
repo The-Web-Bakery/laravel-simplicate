@@ -10,8 +10,8 @@ class SimplicateClient
 {
     const VERSION = "2";
 
-    protected int $offset;
-    protected int $limit;
+    protected int $offset = 0;
+    protected int $limit = 5;
 
     protected Client $httpClient;
 
