@@ -1,5 +1,7 @@
 <?php
 
+namespace TheWebbakery\Simplicate;
+
 use GuzzleHttp\Client;
 use TheWebbakery\Simplicate\Requests\Costs;
 use TheWebbakery\Simplicate\Requests\CRM;

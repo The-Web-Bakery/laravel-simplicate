@@ -1,4 +1,7 @@
 <?php
+
+namespace TheWebbakery\Simplicate\Facade;
+
 use Illuminate\Support\Facades\Facade;
 
 /**

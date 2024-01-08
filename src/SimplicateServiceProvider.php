@@ -1,5 +1,8 @@
 <?php
+namespace TheWebbakery\Simplicate;
+
 use Illuminate\Support\ServiceProvider;
+
 class SimplicateServiceProvider extends ServiceProvider
 {
     public function boot()
