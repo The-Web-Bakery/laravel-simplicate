@@ -19,8 +19,8 @@ class SimplicateClient
        $this->httpClient = new Client([
            "base_uri" => sprintf("https://%s.simplicate.nl/api/v%s" , config("laravel-simplicate.domain"), self::VERSION),
             "headers" => [
-                "Authorization-Key" => config("laravel-simplicate.authentication.key"),
-                "Authorization-Secret" => config("laravel-simplicate.authentication.secret"),
+                "Authentication-Key" => config("laravel-simplicate.authentication.key"),
+                "Authentication-Secret" => config("laravel-simplicate.authentication.secret"),
                 "Content-Type" => "application/json",
                 "Accept" => "application/json"
             ],

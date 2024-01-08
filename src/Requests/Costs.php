@@ -53,6 +53,6 @@ class Costs extends BaseRequest {
     public function expenseById(string $id): ResponseInterface {
         return $this->httpClient->get(
             $this->buildUrl('expense', $id)
-        )->;
+        );
     }
 }
