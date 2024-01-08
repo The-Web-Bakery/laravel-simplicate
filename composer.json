@@ -1,0 +1,31 @@
+{
+    "name": "thewebbakery/laravel-simplicate",
+    "type": "library",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "TheWebbakery\\Simplicate\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Noah Wilderom",
+            "email": "noah@thewebbakery.nl"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "guzzlehttp/guzzle": "^7.8",
+        "illuminate/contracts": "^10.39",
+        "illuminate/container": "^10.39",
+        "illuminate/support": "^10.39"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TheWebbakery\\Simplicate\\SimplicateServiceProvider"
+            ]
+        }
+    }
+}
