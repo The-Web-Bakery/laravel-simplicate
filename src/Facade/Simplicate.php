@@ -3,12 +3,15 @@
 namespace TheWebbakery\Simplicate\Facade;
 
 use Illuminate\Support\Facades\Facade;
+use TheWebbakery\Simplicate\SimplicateClient;
+use TheWebbakery\Simplicate\Requests\Costs;
+use TheWebbakery\Simplicate\Requests\CRM;
 
 /**
- * @method static SimplicateClient offset(int $offset)
- * @method static SimplicateClient limit(int $offset)
- * @method static SimplicateClient costs()
- * @method static SimplicateClient crm()
+ * @method static SimplicateClient offset(int $offset) SimplicateClient
+ * @method static SimplicateClient limit(int $offset) SimplicateClient
+ * @method static SimplicateClient costs() Costs
+ * @method static SimplicateClient crm() CRM
  */
 class Simplicate extends Facade
 {
