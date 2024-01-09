@@ -12,6 +12,7 @@ use TheWebbakery\Simplicate\Requests\CRM;
  * @method static SimplicateClient limit(int $offset)
  * @method static SimplicateClient costs()
  * @method static SimplicateClient crm()
+ * @mixin SimplicateClient
  */
 class Simplicate extends Facade
 {

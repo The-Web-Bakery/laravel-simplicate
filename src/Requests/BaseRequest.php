@@ -33,6 +33,7 @@ class BaseRequest {
         if ($url[0] != "/") {
            $url = '/' . $url;
         }
+        dump($this->prefix . '/' . $url);
 
         return $this->prefix . '/' . $url;
     }

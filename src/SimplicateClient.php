@@ -8,6 +8,7 @@ use TheWebbakery\Simplicate\Requests\CRM;
 
 class SimplicateClient
 {
+    // API Version
     const VERSION = "2";
 
     protected int $offset = 0;
