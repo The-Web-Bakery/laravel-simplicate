@@ -17,43 +17,54 @@ class SimplicateClient
     protected int $offset = 0;
     protected int $limit = 5;
 
+    protected bool $isQueryAutoForwarded;
+
     protected PendingRequest $httpClient;
 
     public function __construct() {
+        $this->isQueryAutoForwarded = config('laravel-simplicate.query_params.auto_forward_query');
         $this->httpClient = Http::baseUrl($this->getBaseUri())
+            ->beforeSending([$this, 'forwardQueryParams'])
             ->acceptJson()
             ->asJson()
             ->withHeaders([
                 "Authentication-Key" => config("laravel-simplicate.authentication.key"),
                 "Authentication-Secret" => config("laravel-simplicate.authentication.secret"),
             ]);
-            $this->httpClient = $this->forwardQueryParams();
     }
 
-    private function forwardQueryParams(): PendingRequest
+    public function enableQueryAutoForward(): self {
+        $this->isQueryAutoForwarded = true;
+        return $this;
+    }
+
+    public function disableQueryAutoForward(): self {
+        $this->isQueryAutoForwarded = false;
+        return $this;
+    }
+
+    private function forwardQueryParams(\Illuminate\Http\Client\Request $request, array $options, PendingRequest $pendingRequest): PendingRequest
     {
-        if(config('laravel-simplicate.query_params.auto_forward_query')) {
-            return $this->httpClient->beforeSending(function(\Illuminate\Http\Client\Request $request, array $options, PendingRequest $pendingRequest) {
-                if(strtoupper($request->method()) === "GET") {
-                    $clientRequest = request();
-                    if($clientRequest->has('offset')) {
-                        $this->offset = $clientRequest->get('offset');
-                    }
-
-                    if($clientRequest->has('limit')) {
-                        $this->limit = $clientRequest->get('limit');
-                    }
-
-                    $query = [
-                        'limit' => $this->limit,
-                        'offset' => $this->offset
-                    ];
-
-                    $pendingRequest = $pendingRequest->withQueryParameters($query);
+        if(strtoupper($request->method()) === "GET") {
+            if($this->isQueryAutoForwarded) {
+                $clientRequest = request();
+                if($clientRequest->has('offset')) {
+                    $this->offset = $clientRequest->get('offset');
                 }
-            });
+
+                if($clientRequest->has('limit')) {
+                    $this->limit = $clientRequest->get('limit');
+                }
+            }
+            $query = [
+                'limit' => $this->limit,
+                'offset' => $this->offset
+            ];
+
+            $pendingRequest->withQueryParameters($query);
         }
-        return $this->httpClient;
+
+        return $pendingRequest;
     }
 
     public function getBaseUri(): string
