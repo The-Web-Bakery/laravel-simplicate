@@ -3,6 +3,8 @@
 namespace TheWebbakery\Simplicate;
 
 use GuzzleHttp\Client;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Facades\Http;
 use TheWebbakery\Simplicate\Requests\Costs;
 use TheWebbakery\Simplicate\Requests\CRM;
 
@@ -14,18 +16,16 @@ class SimplicateClient
     protected int $offset = 0;
     protected int $limit = 5;
 
-    protected Client $httpClient;
+    protected PendingRequest $httpClient;
 
     public function __construct() {
-       $this->httpClient = new Client([
-           "base_uri" => $this->getBaseUri(),
-            "headers" => [
+        $this->httpClient = Http::baseUrl($this->getBaseUri())
+            ->acceptJson()
+            ->asJson()
+            ->withHeaders([
                 "Authentication-Key" => config("laravel-simplicate.authentication.key"),
                 "Authentication-Secret" => config("laravel-simplicate.authentication.secret"),
-                "Content-Type" => "application/json",
-                "Accept" => "application/json"
-            ],
-       ]);
+            ]);
     }
 
     public function getBaseUri(): string
