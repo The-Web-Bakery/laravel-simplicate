@@ -8,6 +8,9 @@ use Illuminate\Http\Client\Response;
 class Costs extends BaseRequest {
     protected PendingRequest $httpClient;
 
+    /**
+     * @link https://developer.simplicate.com/explore#/Costs
+     */
     const PREFIX = "/costs";
 
     public function __construct(PendingRequest $httpClient, int $limit, int $offset)
@@ -16,6 +19,9 @@ class Costs extends BaseRequest {
         parent::__construct(self::PREFIX, $offset, $limit);
     }
 
+    /**
+     * @link https://developer.simplicate.com/explore#!/Costs/get_costs_coststype
+     */
     public function types(): Response
     {
         return $this->httpClient->get(
@@ -23,6 +29,9 @@ class Costs extends BaseRequest {
         );
     }
 
+    /**
+     * @link https://developer.simplicate.com/explore#!/Costs/get_costs_coststype_id
+     */
     public function typeById(string $id): Response
     {
         return $this->httpClient->get(
@@ -30,6 +39,9 @@ class Costs extends BaseRequest {
         );
     }
 
+    /**
+     * @link https://developer.simplicate.com/explore#!/Costs/get_costs_expense
+     */
     public function expenses(): Response
     {
         return $this->httpClient->get(
@@ -37,6 +49,9 @@ class Costs extends BaseRequest {
         );
     }
 
+    /**
+     * @link https://developer.simplicate.com/explore#!/Costs/get_costs_expense_id
+     */
     public function expenseById(string $id): Response
     {
         return $this->httpClient->get(
