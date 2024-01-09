@@ -34,23 +34,23 @@ class SimplicateClient
     {
         if(config('laravel-simplicate.query_params.auto_forward_query')) {
             return $this->httpClient->beforeSending(function(\Illuminate\Http\Client\Request $request, array $options, PendingRequest $pendingRequest) {
-                $clientRequest = request();
-                dump(['beforeSending request' => $clientRequest]);
+                if(strtoupper($request->method()) === "GET") {
+                    $clientRequest = request();
+                    if($clientRequest->has('offset')) {
+                        $this->offset = $clientRequest->get('offset');
+                    }
 
-                if($clientRequest->has('offset')) {
-                   $this->offset = $clientRequest->get('offset');
+                    if($clientRequest->has('limit')) {
+                        $this->limit = $clientRequest->get('limit');
+                    }
+
+                    $query = [
+                        'limit' => $this->limit,
+                        'offset' => $this->offset
+                    ];
+
+                    $pendingRequest = $pendingRequest->withQueryParameters($query);
                 }
-
-                if($clientRequest->has('limit')) {
-                    $this->limit = $clientRequest->get('limit');
-                }
-
-                $query = [
-                    'limit' => $this->limit,
-                    'offset' => $this->offset
-                ];
-
-                $pendingRequest->withQueryParameters($query);
             });
         }
         return $this->httpClient;

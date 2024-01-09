@@ -5,12 +5,12 @@ use Illuminate\Support\ServiceProvider;
 
 class SimplicateServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->offerPublishing();
     }
 
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(
             __DIR__.'/../config/simplicate.php',
@@ -18,7 +18,8 @@ class SimplicateServiceProvider extends ServiceProvider
         );
     }
 
-    public function offerPublishing() {
+    public function offerPublishing(): void
+    {
         if (! function_exists('config_path')) {
             // function not available and 'publish' not relevant in Lumen
             return;

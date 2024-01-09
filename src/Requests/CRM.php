@@ -54,8 +54,7 @@ class CRM extends BaseRequest {
 
     public function debtors(): Response
     {
-        return $this->httpClient
-            ->withQueryParameters($this->defaultQuery())
+        return $this->httpClient->dump()
             ->get(
                 $this->buildUrl('debtor'),
             );
