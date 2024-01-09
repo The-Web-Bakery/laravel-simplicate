@@ -30,10 +30,12 @@ class BaseRequest {
 
     protected function buildUrl(string|int ...$items): string {
         $url = implode("/", [...$items]);
+        $appended = false;
         if ($url[0] != "/") {
            $url = '/' . $url;
+           $appended = true;
         }
-        dump($this->prefix . '/' . $url);
+        dump([$this->prefix . '/' . $url, $appended, $this->prefix, $url]);
 
         return $this->prefix . '/' . $url;
     }
