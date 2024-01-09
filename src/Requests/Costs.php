@@ -10,7 +10,7 @@ class Costs extends BaseRequest {
 
     const PREFIX = "/costs";
 
-    public function __construct(PendingRequest $httpClient, int $offset, int $limit)
+    public function __construct(PendingRequest $httpClient, int $limit, int $offset)
     {
         $this->httpClient = $httpClient;
         parent::__construct(self::PREFIX, $offset, $limit);
