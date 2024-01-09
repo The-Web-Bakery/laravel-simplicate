@@ -2,6 +2,8 @@
 
 namespace TheWebbakery\Simplicate\Requests;
 
+use Illuminate\Http\Client\PendingRequest;
+
 class BaseRequest {
 
     private string $prefix;
@@ -15,16 +17,16 @@ class BaseRequest {
     }
 
     protected function defaultQuery(): array {
-        return [
-            "offset" => $this->offset,
-            "limit" => $this->limit,
-            "sort" => "",
-        ];
+       return [
+           "offset" => $this->offset,
+           "limit" => $this->limit,
+           "sort" => "",
+       ];
     }
 
     protected function defaultOptions(): array {
         return [
-            'query' => $this->defaultQuery(),
+            //
         ];
     }
 
