@@ -2,10 +2,8 @@
 
 namespace TheWebbakery\Simplicate\Requests;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Client\PendingRequest;
-use Psr\Http\Message\ResponseInterface;
+use Illuminate\Http\Client\Response;
 
 class Costs extends BaseRequest {
     protected PendingRequest $httpClient;
@@ -18,10 +16,7 @@ class Costs extends BaseRequest {
         parent::__construct(self::PREFIX, $offset, $limit);
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function types(): \Illuminate\Http\Client\Response
+    public function types(): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('coststype'),
@@ -29,20 +24,14 @@ class Costs extends BaseRequest {
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function typeById(string $id): \Illuminate\Http\Client\Response
+    public function typeById(string $id): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('coststype', $id)
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function expenses(): \Illuminate\Http\Client\Response
+    public function expenses(): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('expense'),
@@ -50,10 +39,7 @@ class Costs extends BaseRequest {
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function expenseById(string $id): \Illuminate\Http\Client\Response
+    public function expenseById(string $id): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('expense', $id)

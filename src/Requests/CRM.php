@@ -2,10 +2,8 @@
 
 namespace TheWebbakery\Simplicate\Requests;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Client\PendingRequest;
-use Psr\Http\Message\ResponseInterface;
+use Illuminate\Http\Client\Response;
 
 class CRM extends BaseRequest {
     protected PendingRequest $httpClient;
@@ -17,10 +15,7 @@ class CRM extends BaseRequest {
         parent::__construct(self::PREFIX, $offset, $limit);
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function contactPersons(): \Illuminate\Http\Client\Response
+    public function contactPersons(): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('contactperson'),
@@ -28,30 +23,21 @@ class CRM extends BaseRequest {
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function deleteContactPerson(string $id): \Illuminate\Http\Client\Response
+    public function deleteContactPerson(string $id): Response
     {
         return $this->httpClient->delete(
             $this->buildUrl('contactperson', $id),
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function contactPersonById(string $id): \Illuminate\Http\Client\Response
+    public function contactPersonById(string $id): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('contactperson', $id)
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function countries(): \Illuminate\Http\Client\Response
+    public function countries(): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('country'),
@@ -59,20 +45,14 @@ class CRM extends BaseRequest {
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function countryById(string $id): \Illuminate\Http\Client\Response
+    public function countryById(string $id): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('country', $id),
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function debtors(): \Illuminate\Http\Client\Response
+    public function debtors(): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('debtor'),
@@ -80,27 +60,21 @@ class CRM extends BaseRequest {
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function documents(): \Illuminate\Http\Client\Response
+    public function documents(): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('document')
         );
     }
 
-    public function getDocumentById(string $id): \Illuminate\Http\Client\Response
+    public function getDocumentById(string $id): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('document', $id),
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function createDocument(array $attributes = []): \Illuminate\Http\Client\Response
+    public function createDocument(array $attributes = []): Response
     {
         return $this->httpClient->post(
             $this->buildUrl('document'),
@@ -108,10 +82,7 @@ class CRM extends BaseRequest {
         );
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function updateDocument(string $id, array $attributes = []): \Illuminate\Http\Client\Response
+    public function updateDocument(string $id, array $attributes = []): Response
     {
         // TODO: Invalid request
         return $this->httpClient->put(
@@ -120,14 +91,14 @@ class CRM extends BaseRequest {
         );
     }
 
-    public function deleteDocument(string $id): \Illuminate\Http\Client\Response
+    public function deleteDocument(string $id): Response
     {
         return $this->httpClient->delete(
             $this->buildUrl('document', $id)
         );
     }
 
-    public function documentTypes(): \Illuminate\Http\Client\Response
+    public function documentTypes(): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('documenttype'),
@@ -135,17 +106,32 @@ class CRM extends BaseRequest {
         );
     }
 
-    public function documentTypeById(string $id): \Illuminate\Http\Client\Response
+    public function documentTypeById(string $id): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('documenttype', $id),
         );
     }
 
-    public function industries(): \Illuminate\Http\Client\Response
+    public function industries(): Response
     {
         return $this->httpClient->get(
             $this->buildUrl('industry'),
+            $this->defaultOptions()
+        );
+    }
+
+    public function industryById(string $id): Response
+    {
+        return $this->httpClient->get(
+            $this->buildUrl('industry', $id)
+        );
+    }
+
+    public function interests(): Response
+    {
+        return $this->httpClient->get(
+            $this->buildUrl('interests'),
             $this->defaultOptions()
         );
     }

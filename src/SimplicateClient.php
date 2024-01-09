@@ -4,6 +4,7 @@ namespace TheWebbakery\Simplicate;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use TheWebbakery\Simplicate\Requests\Costs;
 use TheWebbakery\Simplicate\Requests\CRM;
@@ -26,6 +27,27 @@ class SimplicateClient
                 "Authentication-Key" => config("laravel-simplicate.authentication.key"),
                 "Authentication-Secret" => config("laravel-simplicate.authentication.secret"),
             ]);
+            $this->httpClient = $this->forwardQueryParams();
+    }
+
+    private function forwardQueryParams(): PendingRequest
+    {
+        if(config('laravel-simplicate.query_params.auto_forward_query')) {
+            return $this->httpClient->beforeSending(function(PendingRequest $request, $options) {
+                $clientRequest = request();
+
+                if($clientRequest->has('offset')) {
+                   $this->offset = $clientRequest->get('offset');
+                }
+
+                if($clientRequest->has('limit')) {
+                    $this->limit = $clientRequest->get('limit');
+                }
+
+                return $request;
+            });
+        }
+        return $this->httpClient;
     }
 
     public function getBaseUri(): string
