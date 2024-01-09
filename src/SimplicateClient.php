@@ -43,7 +43,7 @@ class SimplicateClient
         return $this;
     }
 
-    private function forwardQueryParams(\Illuminate\Http\Client\Request $request, array $options, PendingRequest $pendingRequest): PendingRequest
+    public function forwardQueryParams(\Illuminate\Http\Client\Request $request, array $options, PendingRequest $pendingRequest): PendingRequest
     {
         if(strtoupper($request->method()) === "GET") {
             if($this->isQueryAutoForwarded) {
