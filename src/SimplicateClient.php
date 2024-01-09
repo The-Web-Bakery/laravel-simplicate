@@ -2,12 +2,23 @@
 
 namespace TheWebbakery\Simplicate;
 
-use GuzzleHttp\Client;
 use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use TheWebbakery\Simplicate\Requests\Costs;
 use TheWebbakery\Simplicate\Requests\CRM;
+use TheWebbakery\Simplicate\Requests\CustomFields;
+use TheWebbakery\Simplicate\Requests\Documents;
+use TheWebbakery\Simplicate\Requests\Hours;
+use TheWebbakery\Simplicate\Requests\HRM;
+use TheWebbakery\Simplicate\Requests\Invoices;
+use TheWebbakery\Simplicate\Requests\Merger;
+use TheWebbakery\Simplicate\Requests\Mileage;
+use TheWebbakery\Simplicate\Requests\Projects;
+use TheWebbakery\Simplicate\Requests\Sales;
+use TheWebbakery\Simplicate\Requests\Services;
+use TheWebbakery\Simplicate\Requests\Shared;
+use TheWebbakery\Simplicate\Requests\Timeline;
+use TheWebbakery\Simplicate\Requests\Upload;
 
 class SimplicateClient
 {
@@ -88,5 +99,69 @@ class SimplicateClient
     public function crm(): CRM
     {
         return new CRM($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function customFields(): CustomFields
+    {
+        return new CustomFields($this->httpClient, $this->limit, $this->offset);
+    }
+    public function documents(): Documents
+    {
+        return new Documents($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function hours(): Hours
+    {
+        return new Hours($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function hrm(): HRM
+    {
+        return new HRM($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function invoices(): Invoices
+    {
+        return new Invoices($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function merger(): Merger
+    {
+        return new Merger($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function mileage(): Mileage
+    {
+        return new Mileage($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function projects(): Projects
+    {
+        return new Projects($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function sales(): Sales
+    {
+        return new Sales($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function services(): Services
+    {
+        return new Services($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function shared(): Shared
+    {
+        return new Shared($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function timeline(): Timeline
+    {
+        return new Timeline($this->httpClient, $this->limit, $this->offset);
+    }
+
+    public function upload(): Upload
+    {
+        return new Upload($this->httpClient, $this->limit, $this->offset);
     }
 }

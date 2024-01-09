@@ -5,12 +5,12 @@ namespace TheWebbakery\Simplicate\Requests;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 
+/**
+ * @link https://developer.simplicate.com/explore#/CRM
+ */
 class CRM extends BaseRequest {
     protected PendingRequest $httpClient;
 
-    /**
-     * @link https://developer.simplicate.com/explore#/CRM
-     */
     const PREFIX = "/crm";
 
     public function __construct(PendingRequest $httpClient, int $limit, int $offset) {

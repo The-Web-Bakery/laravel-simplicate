@@ -5,12 +5,12 @@ namespace TheWebbakery\Simplicate\Requests;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 
+/**
+ * @link https://developer.simplicate.com/explore#/Costs
+ */
 class Costs extends BaseRequest {
     protected PendingRequest $httpClient;
 
-    /**
-     * @link https://developer.simplicate.com/explore#/Costs
-     */
     const PREFIX = "/costs";
 
     public function __construct(PendingRequest $httpClient, int $limit, int $offset)
