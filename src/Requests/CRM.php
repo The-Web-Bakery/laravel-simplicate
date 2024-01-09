@@ -18,15 +18,14 @@ class CRM extends BaseRequest {
     public function contactPersons(): Response
     {
         return $this->httpClient->get(
-            $this->buildUrl('contactperson'),
-            $this->defaultOptions()
+            $this->buildUrl('contactperson')
         );
     }
 
     public function deleteContactPerson(string $id): Response
     {
         return $this->httpClient->delete(
-            $this->buildUrl('contactperson', $id),
+            $this->buildUrl('contactperson', $id)
         );
     }
 
@@ -40,8 +39,7 @@ class CRM extends BaseRequest {
     public function countries(): Response
     {
         return $this->httpClient->get(
-            $this->buildUrl('country'),
-            $this->defaultOptions()
+            $this->buildUrl('country')
         );
     }
 
@@ -54,10 +52,9 @@ class CRM extends BaseRequest {
 
     public function debtors(): Response
     {
-        return $this->httpClient->dump()
-            ->get(
-                $this->buildUrl('debtor'),
-            );
+        return $this->httpClient->get(
+            $this->buildUrl('debtor'),
+        );
     }
 
     public function documents(): Response
@@ -101,8 +98,7 @@ class CRM extends BaseRequest {
     public function documentTypes(): Response
     {
         return $this->httpClient->get(
-            $this->buildUrl('documenttype'),
-            $this->defaultOptions(),
+            $this->buildUrl('documenttype')
         );
     }
 
@@ -117,7 +113,6 @@ class CRM extends BaseRequest {
     {
         return $this->httpClient->get(
             $this->buildUrl('industry'),
-            $this->defaultOptions()
         );
     }
 
@@ -132,7 +127,6 @@ class CRM extends BaseRequest {
     {
         return $this->httpClient->get(
             $this->buildUrl('interests'),
-            $this->defaultOptions()
         );
     }
 }

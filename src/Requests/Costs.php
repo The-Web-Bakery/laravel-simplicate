@@ -18,11 +18,9 @@ class Costs extends BaseRequest {
 
     public function types(): Response
     {
-        return $this->httpClient
-            ->withQueryParameters($this->defaultQuery())
-            ->get(
-                $this->buildUrl('coststype'),
-            );
+        return $this->httpClient->get(
+            $this->buildUrl('coststype'),
+        );
     }
 
     public function typeById(string $id): Response
@@ -34,11 +32,9 @@ class Costs extends BaseRequest {
 
     public function expenses(): Response
     {
-        return $this->httpClient
-            ->withQueryParameters($this->defaultQuery())
-            ->get(
-                $this->buildUrl('expense'),
-            );
+        return $this->httpClient->get(
+            $this->buildUrl('expense'),
+        );
     }
 
     public function expenseById(string $id): Response
