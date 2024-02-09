@@ -14,8 +14,9 @@ class CRM extends BaseRequest {
     const PREFIX = "/crm";
 
     public function __construct(PendingRequest $httpClient, int $limit, int $offset) {
-        $this->httpClient = $httpClient;
         parent::__construct(self::PREFIX, $offset, $limit);
+        $this->httpClient = $httpClient;
+//        $this->httpClient = $httpClient->withQueryParameters($this->defaultQuery());
     }
 
     /**
@@ -214,11 +215,13 @@ class CRM extends BaseRequest {
     /**
      * @link https://developer.simplicate.com/explore#!/CRM/get_crm_organization
      */
-    public function organisations(): Response
+    public function organisations()
     {
-        return $this->httpClient->get(
+        $response = $this->httpClient->get(
             $this->buildUrl('organization')
         );
+
+        return $this->extendMorelimit($response->collect('data'), 'organization');
     }
 
     /**

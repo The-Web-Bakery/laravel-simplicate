@@ -3,6 +3,7 @@
 namespace TheWebbakery\Simplicate\Requests;
 
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Collection;
 
 class BaseRequest {
 
@@ -24,10 +25,43 @@ class BaseRequest {
        ];
     }
 
+    protected function limit(int $limit): self
+    {
+        $this->limit = $limit;
+        return $this;
+    }
+    protected function offset(int $offset): self
+    {
+        $this->offset = $offset;
+        return $this;
+    }
+
     protected function defaultOptions(): array {
         return [
             //
         ];
+    }
+
+    protected function extendMorelimit(Collection $collection, string|int ...$url) {
+        if($collection->count() == 100) {
+            $defaultMaxLimit = 100;
+            while (true) {
+                $this->offset($defaultMaxLimit);
+                $this->limit(100);
+                $res = $this->httpClient->get(
+                    $this->buildUrl(...$url)
+                );
+                $defaultMaxLimit += 100;
+
+                $resCollect = $res->collect('data');
+                $collection = $collection->merge($resCollect);
+                if($resCollect->count() != 100) {
+                    break;
+                }
+            }
+        }
+
+       return $collection;
     }
 
     protected function buildUrl(string|int ...$items): string {
@@ -36,6 +70,6 @@ class BaseRequest {
            $url = '/' . $url;
         }
 
-        return $this->prefix . $url;
+        return sprintf("%s?offset=%s&limit=%s", $this->prefix . $url, urlencode($this->offset), urlencode($this->limit));
     }
 }

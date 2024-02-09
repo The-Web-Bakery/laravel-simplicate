@@ -23,6 +23,31 @@ class Projects extends BaseRequest
     /**
      * @link
      */
+    public function getProjects(string $organisationId = null): Response
+    {
+        $url = $this->buildUrl('project');
+        if(!is_null($organisationId)) {
+            $url = $url . '&q[organization_id]=' . $organisationId;
+        }
+
+        return $this->httpClient->get(
+            $url
+        );
+    }
+
+    /**
+     * @link
+     */
+    public function getProject(string $id): Response
+    {
+        return $this->httpClient->get(
+            $this->buildUrl('project', $id)
+        );
+    }
+
+    /**
+     * @link
+     */
     /*
     public function (): Response
     {

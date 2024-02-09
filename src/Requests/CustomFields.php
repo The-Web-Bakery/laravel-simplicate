@@ -21,6 +21,49 @@ class CustomFields extends BaseRequest
     }
 
     /**
+     * @link https://developer.simplicate.com/explore#!/Custom_Fields/get_customfields_group
+     */
+    public function groups(): Response
+    {
+        return $this->httpClient->get(
+            $this->buildUrl('group')
+        );
+    }
+
+    /**
+     * @link https://developer.simplicate.com/explore#!/Custom_Fields/delete_customfields_group_id
+     */
+    public function deleteGroup(string $id): Response
+    {
+        return $this->httpClient->delete(
+            $this->buildUrl('group', $id)
+        );
+    }
+
+    /**
+     * @link https://developer.simplicate.com/explore#!/Custom_Fields/get_customfields_group_id
+     */
+    public function groupById(string $id): Response
+    {
+        return $this->httpClient->get(
+            $this->buildUrl('group', $id)
+        );
+    }
+
+    /**
+     * @link https://developer.simplicate.com/explore#!/Custom_Fields/post_customfields_group_id
+     * @deprecated
+     */
+    public function createGroup(array $attributes): Response
+    {
+        throw new \HttpException("This request is currently not working on the Simplicate API");
+        return $this->httpClient->post(
+            $this->buildUrl('group'),
+            $attributes
+        );
+    }
+
+    /**
      * @link
      */
     /*

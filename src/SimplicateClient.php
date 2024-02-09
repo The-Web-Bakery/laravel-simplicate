@@ -68,10 +68,12 @@ class SimplicateClient
                 }
             }
         }
+
         $query = [
             'limit' => $this->limit,
             'offset' => $this->offset
         ];
+        return $pendingRequest;
 
         return $pendingRequest->withQueryParameters($query);
     }

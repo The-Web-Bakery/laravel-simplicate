@@ -21,6 +21,16 @@ class Sales extends BaseRequest
     }
 
     /**
+     * @link https://developer.simplicate.com/explore#!/Sales/get_sales_sales
+     */
+    public function getSales(): Response
+    {
+        return $this->httpClient->get(
+            $this->buildUrl('sales')
+        );
+    }
+
+    /**
      * @link
      */
     /*
