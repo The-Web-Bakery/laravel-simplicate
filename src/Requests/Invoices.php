@@ -35,7 +35,6 @@ class Invoices extends BaseRequest
             $url
         );
 
-//        return $this->extendMorelimit($response->collect('data'), 'invoice');
         return $response->collect('data');
     }
 
@@ -61,7 +60,7 @@ class Invoices extends BaseRequest
 
     public function getDocumentsForInvoice(string $invoiceId): Response {
         $url = $this->buildUrl('document');
-        $url = sprintf('%s?q[document_type.label]=%s&q[invoice_id]=%s',$url, 'label_sended%20invoice', $invoiceId);
+        $url = sprintf('%s&q[linked_to.invoice_id]=%s',$url, $invoiceId);
 
         return $this->httpClient->get(
             $url

@@ -23,6 +23,16 @@ class Documents extends BaseRequest
     /**
      * @link
      */
+    public function download(string $documentId): Response
+    {
+        return $this->httpClient->withHeader('Content-Type', 'application/pdf')->get(
+            $this->buildUrl('download', $documentId)
+        );
+    }
+
+    /**
+     * @link
+     */
     /*
     public function (): Response
     {
